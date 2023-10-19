@@ -97,9 +97,11 @@ def save_all_concept_sentences(concept_sentence_df, concept_map):
         female_percentage = concept_stat[0]
         male_percentage = concept_stat[1]
         others_percentage = concept_stat[2]
+        total_count = concept_stat[3]
 
 
-        sentences = ("\nFemale related Prediction (%): " + str(female_percentage) + "%" +
+        sentences = ("\nPercentage of sentences related to this concept: " + str(round(total_count/1631*100, 2)) + "%" +
+                     "\nFemale related Prediction (%): " + str(female_percentage) + "%" +
                      "\nMale related Prediction (%): " + str(male_percentage) + "%" +
                      "\nOthers Prediction (%): " + str(others_percentage) + "%\n"  +
                      "\nAll sentences with the concept:\n")

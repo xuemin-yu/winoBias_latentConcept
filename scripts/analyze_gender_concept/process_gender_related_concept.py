@@ -84,8 +84,8 @@ def get_all_sentences(data, sentences_idx, masked_info_df):
 def stat_gender_in_a_concept(concept_sentence_df, concept):
     mask_prediction_list = concept_sentence_df[concept_sentence_df['concept'] == concept]['MASK_prediction'].tolist()[0]
 
-    female_gender_words = ["she", "She", "her", "Her"]
-    male_gender_words = ["he", "He", "his", "His", "him", "Him"]
+    female_gender_words = ["she", "She", "her", "Her", "hers", "Hers", "herself", "Herself"]
+    male_gender_words = ["he", "He", "his", "His", "him", "Him", "himself", "Himself"]
 
     female_count = 0
     male_count = 0
@@ -103,7 +103,7 @@ def stat_gender_in_a_concept(concept_sentence_df, concept):
     female_percentage = round(female_count / total_count * 100, 2)
     male_percentage = round(male_count / total_count * 100, 2)
     others_percentage = round(others_count / total_count * 100, 2)
-    return female_percentage, male_percentage, others_percentage
+    return female_percentage, male_percentage, others_percentage, total_count
 
 
 def get_all_stats(concept_sentence_df, output_file):
@@ -112,8 +112,8 @@ def get_all_stats(concept_sentence_df, output_file):
     stat = []
 
     for concept in gender_related_concepts:
-        female_percentage, male_percentage, others_percentage = stat_gender_in_a_concept(concept_sentence_df, concept)
-        stat.append((female_percentage, male_percentage, others_percentage))
+        female_percentage, male_percentage, others_percentage, total_count = stat_gender_in_a_concept(concept_sentence_df, concept)
+        stat.append((female_percentage, male_percentage, others_percentage, total_count))
 
     # add the column to the dataframe
     concept_sentence_df['statistic'] = stat
